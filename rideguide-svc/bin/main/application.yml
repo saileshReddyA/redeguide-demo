@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: demo-svc
+  datasource:
+    url: jdbc:mysql://${DB_SERVER:localhost}:${DB_PORT:3306}/${DB_SCHEMA:rideguideapi}?createDatabaseIfNotExist=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&useLegacyDatetimeCode=false&serverTimezone=UTC&verifyServerCertificate=false&useSSL=${DB_USE_SSL:true}&requireSSL=${DB_REQUIRE_SSL:true}&only_full_group_by=false&useUnicode=true&characterEncoding=utf8
+    username: ${DB_USER:root}
+    password: ${PASSWORD:sai@1234}
+    driver-class-name: com.mysql.jdbc.Driver
+    testPath-on-borrow: true
+    testPath-while-idle: true
+    validation-query: SELECT 1
+  flyway:
+    schemas: ${DB_SCHEMA:rideguideapi}
+    placeholders:
+      schema: ${DB_SCHEMA:rideguideapi}
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format-sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+app:
+  jwt:
+    secret:
+      key: ${JWT_SECRET_KEY:abhra_ka_dhabra}
+    ttl:
+      minutes: ${JWT_TTL_MINS:180}
+amazonProperties:
+  endpointUrl: https://s3.us-east-1.amazonaws.com
+  accessKey: AKIA2KRS7GFGJWSMSNNU
+  secretKey: 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
+  bucketName: rideguidevideos
